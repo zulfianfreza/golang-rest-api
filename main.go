@@ -11,6 +11,7 @@ import (
 	"github.com/zulfianfreza/golang-rest-api/controller"
 	"github.com/zulfianfreza/golang-rest-api/exception"
 	"github.com/zulfianfreza/golang-rest-api/helper"
+	"github.com/zulfianfreza/golang-rest-api/middleware"
 	"github.com/zulfianfreza/golang-rest-api/repository"
 	"github.com/zulfianfreza/golang-rest-api/service"
 )
@@ -35,7 +36,7 @@ func main() {
 
 	server := http.Server{
 		Addr:    "localhost:8000",
-		Handler: router,
+		Handler: middleware.NewAuthMiddleware(router),
 	}
 
 	err := server.ListenAndServe()
